@@ -12,11 +12,11 @@ Gets Numpy array from the Server and uses it to train the CNN model. The trained
 
 ## Server (Python)
 
-### Record mode
+### Train mode
 
 Recieves frames and data. Saves only when there is a key press action (FL,FR,F,L,R,B). The image is
 converted to grayscale, sliced to get bottom half and flattened to get a single dimensional array. Accelerometer data is added to the array (if present). Numpy array is stored into a file and fed to CNN.
 
-### Drive mode
+### Auto mode
 
 Uses predict method from CNN to feed image frame array from TCP server and get the output. The output is fed into the serial port to send signals to the car via transmitter.
