@@ -1,0 +1,7 @@
+training_data/images/1477567899.63.jpg 5
+training_data/images/1477567900.85.jpg 5
+training_data/images/1477567901.76.jpg 3
+training_data/images/1477567902.68.jpg 6
+training_data/images/1477567903.29.jpg 4
+training_data/images/1477567903.91.jpg 5
+training_data/images/1477567904.52.jpg 6
