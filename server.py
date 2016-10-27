@@ -40,11 +40,11 @@ class Server():
 			if self.mode == "TRAIN":
 				
 				# filename is current timestamp
-				filename = 'training_data/images/'+str(time.time())+".jpg"
+				filename = 'images/'+str(time.time())+".jpg"
 
 				self.training_file = filename
 
-				with open(filename, 'wb') as image:
+				with open('training_data/'+filename, 'wb') as image:
 					while True:
 						data =client_socket.recv(4096)
 						if not data:break
@@ -53,7 +53,7 @@ class Server():
 				print "Frame recieved"
 
 				
-				dataset_record=open('training_data/dataset_record.txt','a')
+				dataset_record=open('training_data/dataset_record.txt','a+')
 				
 				for event in pygame.event.get():
 					if event.type == KEYDOWN:
@@ -61,22 +61,22 @@ class Server():
 
 						if key[pygame.K_UP] and key[pygame.K_RIGHT]:
 							print "Forward Right\n"
-							dataset_record.write(filename+" "+"1\n")
+							dataset_record.write("training_data/"+filename+" "+"1\n")
 						elif key[pygame.K_UP] and key[pygame.K_LEFT]:
 							print "Forward Left"
-							dataset_record.write(filename+" "+"2\n")
+							dataset_record.write("training_data/"+filename+" "+"2\n")
 						elif key[pygame.K_UP]:
 							print "Forward"
-							dataset_record.write(filename+" "+"3\n")
+							dataset_record.write("training_data/"+filename+" "+"3\n")
 						elif key[pygame.K_RIGHT]:
 							print "Right"
-							dataset_record.write(filename+" "+"4\n")
+							dataset_record.write("training_data/"+filename+" "+"4\n")
 						elif key[pygame.K_LEFT]:
 							print "Left"
-							dataset_record.write(filename+" "+"5\n")
+							dataset_record.write("training_data/"+filename+" "+"5\n")
 						elif key[pygame.K_DOWN]:
 							print "Backwards"
-							dataset_record.write(filename+" "+"6\n")
+							dataset_record.write("training_data/"+filename+" "+"6\n")
 						elif key[pygame.K_q]:
 							print 'Training data collection over.'
 							exit()
@@ -88,18 +88,18 @@ class Server():
 				print neuralnet.predict(processed)
 				self.show_recieved_image(data)
 
-	def image_preprocess(self,image):
-		# encode the image as grayscale
-		gray = cv2.imdecode(np.fromstring(image, dtype=np.uint8), cv2.CV_LOAD_IMAGE_GRAYSCALE)
-		# resize the image to fit the input nodes of the neural network
-		gray = cv2.resize(image, (62, 62))
-		return gray
+	# def image_preprocess(self,image):
+	# 	# encode the image as grayscale
+	# 	# gray = cv2.imdecode(np.fromstring(image, dtype=np.uint8), cv2.CV_LOAD_IMAGE_GRAYSCALE)
+	# 	# resize the image to fit the input nodes of the neural network
+	# 	gray = cv2.resize(image, (62, 62))
+	# 	return gray
 
 	def show_recieved_image(self,data):
 		image = cv2.imdecode(np.fromstring(data, dtype=np.uint8), cv2.CV_LOAD_IMAGE_UNCHANGED)
 		cv2.imshow('Recieved image', image)
 
-server = Server(8000,"TRAIN")
+server = Server(6666,"TRAIN")
 server.listen()
 
 
