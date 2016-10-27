@@ -6,7 +6,7 @@ from tflearn.data_augmentation import ImageAugmentation
 
 class CNN:
 	def __init__(self):
-		self.trained_model = null
+		self.trained_model = None
 
 	def build_training_dataset(self,path):
 		"""Build hdf5 file from collection of images and labels
