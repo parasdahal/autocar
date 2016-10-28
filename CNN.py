@@ -72,7 +72,7 @@ class CNN:
 		
 		if save==True:
 			# save the model in a file
-			model.save('training_dataset/trained_model.tf')
+			model.save('training_data/trained_model.tf')
 
 	def load_model(self,model_path):
 		"""
@@ -92,6 +92,24 @@ class CNN:
 		X: ndarray()
 			Image of size 64x64
 		"""
-		return self.trained_model.predict(X)
+		vector = self.trained_model.predict(X)
+		prob = max(vector)
+		index = [i for i, j in enumerate(vector) if j == vector]
+		direction = ""
+		if index == 0:
+			direction = "Forward Right"
+		elif index == 1:
+			direction = "Forward Left"
+		elif index == 2:
+			direction = "Forward"
+		elif index == 3:
+			direction = "Right"
+		elif index == 4:
+			direction = "Left"
+		elif index == 5:
+			direction = "Backwards"
+		print direction
+		return vector
+
 
 
